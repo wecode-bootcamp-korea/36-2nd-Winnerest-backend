@@ -2,7 +2,7 @@ const { appDataSource } = require("./dataSource");
 const ErrorCreater = require("../middlewares/errorCreater");
 
 const createUser = async (nickname, kakaoId, profileImgUrl) => {
-  
+
   const user = await appDataSource.query(
     `INSERT INTO user (
       nickname,
@@ -15,29 +15,27 @@ const createUser = async (nickname, kakaoId, profileImgUrl) => {
 };
 
 const getUserByKakaoId = async (kakaoId) => {
-    
-    const [user] = await appDataSource.query(
-  
-      `SELECT *
-       FROM user u
-       WHERE u.kakao_id = ?
+
+  const [user] = await appDataSource.query(
+    `SELECT *
+      FROM user u
+      WHERE u.kakao_id = ?
       `,
-      [kakaoId]
-    );
-    return user;
-  };
+    [kakaoId]
+  );
+  return user;
+};
 
-  const getUserById = async (userId) => {
+const getUserById = async (userId) => {
 
-    const [user] = await appDataSource.query(
-  
-      `SELECT *
-       FROM user u
-       WHERE u.id = ?
+  const [user] = await appDataSource.query(
+    `SELECT *
+      FROM user u
+      WHERE u.id = ?
       `,
-      [userId]
-    );
-    return user;
-  };
+    [userId]
+  );
+  return user;
+};
 
-module.exports={createUser, getUserByKakaoId, getUserById}
+module.exports = { createUser, getUserByKakaoId, getUserById }
