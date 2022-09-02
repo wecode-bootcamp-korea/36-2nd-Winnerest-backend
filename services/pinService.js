@@ -8,6 +8,8 @@ const createPin = async (boardId, title, contents, tagId, imgUrl) => {
     //if(!Tag){throw new ErrorCreater("INVAILD TAG", 404)}
     
     const createMyPin = await pinDao.createMyPin(boardId, title, contents, tagId, imgUrl);
+
+    console.log(createMyPin);
     return createMyPin}
 
 module.exports = {createPin}

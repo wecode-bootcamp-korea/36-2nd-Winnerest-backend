@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const userDao = require("../models/authDao");
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const logIn = async (nickname, kakaoId, profileImgUrl) => {
 
