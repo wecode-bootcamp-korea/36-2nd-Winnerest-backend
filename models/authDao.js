@@ -1,5 +1,5 @@
 const { appDataSource } = require("./dataSource");
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const createUser = async (nickname, kakaoId, profileImgUrl) => {
   
@@ -27,7 +27,8 @@ const getUserByKakaoId = async (kakaoId) => {
     return user;
   };
 
-  const getUserById = async (userId) => {
+const getUserById = async (userId) => {
+
     const [user] = await appDataSource.query(
   
       `SELECT *
@@ -38,7 +39,5 @@ const getUserByKakaoId = async (kakaoId) => {
     );
     return user;
   };
-
-
 
 module.exports={createUser, getUserByKakaoId, getUserById}

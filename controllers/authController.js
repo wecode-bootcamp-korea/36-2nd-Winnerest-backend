@@ -1,6 +1,6 @@
 const authService = require("../services/authService");
 const fetch = require('node-fetch')
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const logIn = async (req, res) => {
   
@@ -20,7 +20,7 @@ const logIn = async (req, res) => {
           const profileImgUrl =response.properties.thumbnail_image
           
         if ( !nickname || !kakaoId ) {
-            throw new error("KEY_ERROR", 400)}
+            throw new ErrorCreater("KEY_ERROR", 400)}
             
         const Token = await authService.logIn(nickname, kakaoId, profileImgUrl)
         res.status(200).json({ accessToken: Token })

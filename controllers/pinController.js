@@ -1,5 +1,5 @@
 const pinService = require('../services/pinService');
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const createPin = async (req, res) => {
     
@@ -12,7 +12,7 @@ const createPin = async (req, res) => {
     
 
     if(!boardId ||!title ||!contents || !tagId || !imgUrl){
-        throw new error("KEY_ERROR", 400)}
+        throw new ErrorCreater("KEY_ERROR", 400)}
     
         await pinService.createPin(boardId, title, contents, tagId, imgUrl)
         

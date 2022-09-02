@@ -1,10 +1,10 @@
 const authDao = require("../models/authDao");
 const jwt = require("jsonwebtoken");
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const validationToken = async (req, res, next) => {
  
-    const accessToken = req.headers.authorization.split(" ")[1];
+    const accessToken = req.headers.authorization;
     const decode = jwt.verify(accessToken, process.env.JWT_SECRET);
     const userId = decode.sub;
     const user = await authDao.getUserById(userId);

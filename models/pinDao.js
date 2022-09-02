@@ -1,5 +1,5 @@
 const { appDataSource } = require("./dataSource");
-const error = require("../middlewares/errorCreater");
+const ErrorCreater = require("../middlewares/errorCreater");
 
 const createMyPin = async (boardId, title, contents, tagId, imgUrl) => {
     
