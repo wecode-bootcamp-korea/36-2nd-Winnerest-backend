@@ -5,9 +5,8 @@ const createPin = async (boardId, title, contents, tagId, imgUrl) => {
     
     const Tag = await pinDao.getMyPinTag(tagId)
     
-    if(!Tag)
-
-    {throw new error("INVAILD TAG", 409)}
+    if(!Tag){throw new error("INVAILD TAG", 404)}
+    
     const createMyPin = await pinDao.createMyPin(boardId, title, contents, tagId, imgUrl);
     return createMyPin}
 

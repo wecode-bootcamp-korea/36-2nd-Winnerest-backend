@@ -18,14 +18,33 @@ const createMyPin = async (boardId, title, contents, tagId, imgUrl) => {
   );
     console.log(pinInsert)
     console.log(pinInsert.insertId)
-    console.log(tagId)
     
+    pinId = [1]
+    tagId = [1, 2, 3]
+    
+    const pinTag = [
+      { "pinId" : 1 , "tagId" : 1}, 
+      { "pinId" : 1 , "tagId" : 1}, 
+      { "pinId" : 1 , "tagId" : 1}
+    ] 
+
     const tagInsert = await queryRunner.query(
-    `INSERT INTO pin_tag (
+      `DELIMITER $$
+      CREATE PROCEDURE CREATETAG()
+      BEGIN
+      DECLARE i INT DEFAULT 1;
+      WHILE i <= ${tagId.length}
+      DO 
+      INSERT INTO pin_tag (
         pin_id,
         tag_id
-      ) VALUES (?,?)`,
-    [pinInsert.insertId,tagId]
+      ) VALUES (?,?)
+      SET i = i+1;
+      END WHILE
+      END$$
+      DELIMITER ;
+      `,
+      [pinInsert.insertId, tagId]
     )
     await queryRunner.commitTransaction()}
     
