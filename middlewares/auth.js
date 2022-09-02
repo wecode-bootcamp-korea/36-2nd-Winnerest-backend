@@ -11,11 +11,10 @@ const validationToken = async (req, res, next) => {
 
     if (!user) {
       throw new error("USER_NOT_DEFINED",409)
-    }else{
-      req.userId = userId;
+    }
+      req.user = userId;
       next();
     }
-  } 
 
 module.exports = {
   validationToken,
