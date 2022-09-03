@@ -5,5 +5,6 @@ const errorHandler = require("../middlewares/errorHandler");
 const pinRouter = express.Router();
 
 pinRouter.post("/", errorHandler(pinController.createPin))
+pinRouter.delete("/:id", errorHandler(pinController.deletePin))
 
 module.exports = { pinRouter };

@@ -16,51 +16,66 @@ const createMyPin = async (boardId, title, contents, tagId, imgUrl) => {
         img_url
         ) VALUES (?,?,?,?)`,
       [boardId, title, contents, imgUrl]
-   
-  );
-      console.log(pinInsert)
-      console.log(pinInsert.insertId)
-    
-      const tagInsert = await queryRunner.query(
-
+   );
+      
+      for(let i in tagId){
+      await queryRunner.query(
       `INSERT INTO pin_tag (
         pin_id,
         tag_id
       ) VALUES (?,?)
       `,
-      [pinInsert.insertId, tagId]
-    )
-    
-
-  //   try {
-  //     // execute some operations on this transaction:
-  //     await queryRunner.manager.save(pinInsert)
-  //     await queryRunner.manager.save(tagInsert)
-  
-  //     // commit transaction now:
-  //     await queryRunner.commitTransaction()
-  // } catch (err) {
-  //     // since we have errors let's rollback changes we made
-  //     await queryRunner.rollbackTransaction()
-  // } finally {
-  //     // you need to release query runner which is manually created:
-  //     await queryRunner.release()
-  // }
-
-    await queryRunner.manager.save(pinInsert)
-    await queryRunner.manager.save(tagInsert)
+      [pinInsert.insertId, tagId[i]]
+    )}
 
     await queryRunner.commitTransaction()
-
-    return [pinInsert, tagInsert]
   }
-    catch (err) {
+    catch{
         await queryRunner.rollbackTransaction()
-      } finally {
-          await queryRunner.release()
+        throw new ErrorCreater("INVAILD_DATA_INPUT",500)
+      }
+    finally {
+        await queryRunner.release()
     }
 }
 
-//const getMyPinTag = async()
+const getMyTag = async(tagId) => {
+  
+  let tagList = []
+  for(let i in tagId){
+    let [tag] = await appDataSource.query(
+      `SELECT *
+      FROM tag t
+      WHERE t.id = ?
+        `,
+       [tagId[i]]
+    )
+    tagList[i] = tag
+}
+    return tagList
+}
 
-module.exports = {createMyPin}
+const checkMyPin = async(pinId, userId) => {
+  
+ const [myPin] = await appDataSource.query(
+
+      `SELECT *
+      FROM pin p
+      INNER JOIN board b ON b.id = p.board_id
+      INNER JOIN user u ON u.id = b.user_id
+      WHERE p.id = ${pinId} AND u.id = ${userId}
+        `,
+      )
+      return myPin
+}
+
+const deleteMyPin = async(pinId) => {
+    
+  return await appDataSource.query(
+      `DELETE FROM pin p
+       WHERE p.id = ${pinId}
+         `,
+       )
+ }
+
+module.exports = {createMyPin, getMyTag, checkMyPin, deleteMyPin}

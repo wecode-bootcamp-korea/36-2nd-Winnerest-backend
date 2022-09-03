@@ -5,6 +5,6 @@ const {authRouter} = require("./authRouter");
 const { pinRouter } = require("./pinRouter");
 
 router.use("/auth", authRouter);
-router.use("/pin", pinRouter);
+router.use("/pins", pinRouter);
 
 module.exports = router;

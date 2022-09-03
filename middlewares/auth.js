@@ -12,7 +12,7 @@ const validationToken = async (req, res, next) => {
     if (!user) {
       throw new error("USER_NOT_DEFINED",409)
     }
-      req.user = userId;
+      req.user = user
       next();
     }
 

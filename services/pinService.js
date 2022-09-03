@@ -2,14 +2,16 @@ const pinDao = require('../models/pinDao')
 const ErrorCreater = require("../middlewares/errorCreater");
 
 const createPin = async (boardId, title, contents, tagId, imgUrl) => {
-    
-    //const Tag = await pinDao.getMyPinTag(tagId)
-    
-    //if(!Tag){throw new ErrorCreater("INVAILD TAG", 404)}
-    
-    const createMyPin = await pinDao.createMyPin(boardId, title, contents, tagId, imgUrl);
+     const createMyPin = await pinDao.createMyPin(boardId, title, contents, tagId, imgUrl);
+}
 
-    console.log(createMyPin);
-    return createMyPin}
+const deletePin = async (pinId, userId) => {
+    const myPin = await pinDao.checkMyPin(pinId, userId)
+    
+    if(!myPin)
+    {throw new ErrorCreater("INVAILD_ACCESS", 404)}
+    
+    const deleteMyPin = await pinDao.deleteMyPin(pinId);
+}
 
-module.exports = {createPin}
+module.exports = {createPin, deletePin}
