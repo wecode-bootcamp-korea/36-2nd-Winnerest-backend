@@ -55,4 +55,52 @@ const getReviewListOfPin = async (pinId) => {
      );
      return reviewList
   }
-module.exports ={postMyReview, checkMyReview, deleteMyReview, getReviewListOfPin}
+
+const patchMyReview = async (reviewId, contents, userId) => {
+  
+    return await appDataSource.query(
+      `UPDATE review
+        SET 
+        contents = ? 
+        WHERE user_id = ${userId}
+        AND id = ${reviewId}`,
+
+      [contents]
+    );
+};
+
+const countLike = async (reviewId, userId) => {
+
+    const [countLike] = await appDataSource.query(
+      `SELECT count(*) AS count
+       FROM likes
+       WHERE review_id = ${reviewId}
+       And user_id = ${userId}`
+    );
+       return countLike
+     
+  }
+  
+const postMyLike = async (reviewId, userId) => {
+  return await appDataSource.query(
+    `INSERT INTO likes( 
+              review_id, 
+              user_id
+          ) VALUES (?, ?)`,
+
+    [reviewId, userId]
+  );
+};
+
+const deleteMyLike = async (reviewId, userId) => {
+  return await appDataSource.query(
+    `DELETE
+           FROM likes
+           WHERE review_id = ${reviewId}
+          And user_id = ${userId}`,
+
+    [reviewId, userId]
+  );}
+
+  module.exports = { postMyReview, checkMyReview, deleteMyReview, getReviewListOfPin,
+   patchMyReview, countLike, postMyLike, deleteMyLike}
