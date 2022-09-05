@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const ErrorCreater = require('../middlewares/errorCreater')
 
 const validationToken = async (req, res, next) => {
+
   const accessToken = req.headers.authorization;
 
   if (!accessToken) {

@@ -1,3 +1,4 @@
+const ErrorCreater = require("../middlewares/errorCreater");
 const { appDataSource } = require('./dataSource');
 
 const getMainPinInfos = async (userId, pageSize, page) => {
@@ -116,6 +117,59 @@ const patchMyPin = async(pinId, boardId, title, contents) => {
     )
 }
 
-module.exports = {
-    getMainPinInfos, getRecommendPins, getPinInfo, checkMyPin, deleteMyPin, patchMyPin
+const createMyPin = async (boardId, title, contents, tagIds, imgUrl) => {
+    
+    const queryRunner = appDataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction()
+    try{
+      
+      const pinInsert = await queryRunner.query(
+      `INSERT INTO pin (
+        board_id,
+        title,
+        contents,
+        img_url
+        ) VALUES (?,?,?,?)`,
+      [boardId, title, contents, imgUrl]
+   );
+      
+      const lists = []
+      for(let i in tagIds){
+       lists.push([pinInsert.insertId, tagIds[i]])
+      }
+      
+      await queryRunner.query(
+      `INSERT INTO pin_tag (
+        pin_id,
+        tag_id
+      ) VALUES ?
+      `,
+      [lists]
+    )
+
+    await queryRunner.commitTransaction()
+  }
+    catch{
+        await queryRunner.rollbackTransaction()
+        throw new ErrorCreater("INVAILD_DATA_INPUT",500)
+      }
+    finally {
+        await queryRunner.release()
+    }
 }
+
+const checkMyBoard = async(boardId, userId) => {
+  
+  const [myBoard] = await appDataSource.query(
+ 
+       `SELECT *
+       FROM board b
+       WHERE b.id = ${boardId} AND b.user_id = ${userId}
+         `,
+       )
+       return myBoard
+ }
+
+module.exports = {getMainPinInfos, getRecommendPins, getPinInfo, 
+    patchMyPin ,getMainPinInfos, checkMyPin, createMyPin, checkMyBoard, deleteMyPin}

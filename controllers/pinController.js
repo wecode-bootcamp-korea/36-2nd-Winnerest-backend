@@ -33,7 +33,6 @@ const deletePin = async (req, res) => {
     }
     await pinService.deletePin(pinId, userId)
     res.status(200).json({message: "DELETE_SUCCESS"});
-
 }
 
 const patchPin = async(req, res) => {
@@ -49,6 +48,19 @@ const patchPin = async(req, res) => {
     res.status(200).json({message: "PATCH_SUCCESS"});
 } 
 
-module.exports = {
-    findMainPins, findRecommendPins, getPinInfo, deletePin, patchPin
-}
+const createPin = async (req, res) => {
+
+    const result = req.query
+    const {boardId, title, contents, tagIds} = result;
+    
+    const imgUrl = req.file.location
+    const userId = req.user.id
+    
+    if(!boardId ||!title ||!tagIds || !imgUrl){
+        throw new ErrorCreater("KEY_ERROR", 400)}
+    
+    await pinService.createPin(boardId, title, contents, tagIds, imgUrl, userId)
+    res.status(201).json({message: "POST_CREATE"})
+        }
+
+module.exports = {findMainPins, findRecommendPins, getPinInfo, createPin, deletePin, patchPin}
