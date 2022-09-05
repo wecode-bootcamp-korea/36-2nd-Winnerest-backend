@@ -27,7 +27,7 @@ const getMainPinInfos = async (userId, pageSize, page) => {
         ORDER BY pinId
         LIMIT ? OFFSET ?;`, [userId, pageSize, page])
     } catch (err) {
-        throw new ErrorCreater(500, 'INVALID_DATA_INPUT')
+        throw new ErrorCreater('INVALID_DATA_INPUT', 500)
     }
 }
 
