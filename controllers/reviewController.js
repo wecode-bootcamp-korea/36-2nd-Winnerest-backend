@@ -49,5 +49,36 @@ const getReviewsOfPin = async (req, res) => {
     res.status(200).json({ reviewList : reviewList});
    };
 
-module.exports ={postReviewOfPin, deleteReview, getReviewsOfPin}
+const patchReviewOfPin = async (req, res) => {
+  
+    const { contents } = req.body;
+    const userId = req.user.id
+    const reviewId = req.params.reviewId
+
+    if (!reviewId || !contents) {
+      throw new ErrorCreater("KEY_ERROR", 400)
+    }
+
+    if (contents.trim().length === 0) {
+      throw new ErrorCreater("CONTENTS_NOT_DEFINED", 400)
+    }
+    await reviewService.patchReviewOfPin(reviewId ,contents, userId);
+    
+    return res.status(200).json({
+      message: "REVIEW_EDITED_SUCCESS",
+    });}
+
+const postLikeOfReview = async (req, res) => {
+    const reviewId = req.params.reviewId
+    const userId = req.user.id
+    if (!reviewId) {
+      throw new ErrorCreater("KEY_ERROR", 400)
+    }
+
+    await reviewService.postLikeOfReview(reviewId, userId);
+    return res.status(201).json({
+      message: "POST_LIKE_SUCCESS",
+    });}
+
+module.exports ={postReviewOfPin, deleteReview, getReviewsOfPin, patchReviewOfPin, postLikeOfReview}
 
