@@ -22,4 +22,19 @@ const postReviewOfPin = async (req, res) => {
       });
     };
 
-module.exports ={postReviewOfPin}
+const deleteReview = async (req, res) => {
+  
+    const reviewId = req.params.reviewId
+    const userId = req.user.id
+    
+      if (!reviewId){
+        throw new ErrorCreater("KEY_ERROR", 400)
+      }
+    
+        await reviewService.deleteReview(reviewId, userId);
+        return res.status(200).json({
+          message: "REVIEW_DELETE_SUCCESS",
+        })
+      };
+
+module.exports ={postReviewOfPin, deleteReview}

@@ -9,4 +9,18 @@ const postReviewOfPin = async (contents, pinId, userId) => {
     return postReview;
   };
 
-module.exports ={postReviewOfPin}
+const deleteReview = async (reviewId, userId) => {
+    validationId(reviewId)
+
+    const myReview = await reviewDao.checkMyReview(reviewId, userId)
+    
+    if(!myReview) {
+        throw new ErrorCreater("INVAILD_ACCESS", 404)
+    }
+    const deleteMyReview = await reviewDao.deleteMyReview(reviewId, userId);
+  
+    return deleteMyReview;
+  };
+
+module.exports ={postReviewOfPin, deleteReview}
+
