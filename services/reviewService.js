@@ -22,5 +22,13 @@ const deleteReview = async (reviewId, userId) => {
     return deleteMyReview;
   };
 
-module.exports ={postReviewOfPin, deleteReview}
+const getReviewsOfPin = async (pinId) => {
+    validationId(pinId);
+  
+    const getReviewListOfPin= await reviewDao.getReviewListOfPin(pinId);
+  
+    return getReviewListOfPin;
+  };
+
+  module.exports ={postReviewOfPin, deleteReview, getReviewsOfPin}
 

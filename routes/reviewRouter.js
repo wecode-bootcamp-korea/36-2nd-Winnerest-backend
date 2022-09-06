@@ -7,6 +7,7 @@ const reviewRouter = express.Router();
 
 reviewRouter.post("/:pinId", errorHandler(auth.validationToken), errorHandler(reviewController.postReviewOfPin));
 reviewRouter.delete("/:reviewId", errorHandler(auth.validationToken), errorHandler(reviewController.deleteReview));
+reviewRouter.get("/pin/:pinId", errorHandler(auth.validationToken), errorHandler(reviewController.getReviewsOfPin));
 
 module.exports = {
     reviewRouter
