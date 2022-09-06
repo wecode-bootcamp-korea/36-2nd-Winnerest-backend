@@ -1,5 +1,4 @@
 const authService = require("../services/authService");
-const ErrorCreater = require("../middlewares/errorCreater");
 
 const logIn = async (req, res) => {
     const accessToken = req.headers.authorization;
@@ -13,7 +12,23 @@ const getUserInfo = async (req, res) => {
     res.status(200).json({data : userInfo});
 }
 
+const createFollower = async (req, res) => {
+    const { followerUserId } = req.params;
+    const followingUserId = req.user.id;
+    await authService.createFollower(followingUserId, followerUserId);
+    res.status(201).json({message : 'CREATED_FOLLOWER'})
+} 
+
+const deleteFollower = async (req, res) => {
+    const { followerUserId } = req.params;
+    const followingUserId = req.user.id;
+    await authService.deleteFollower(followingUserId, followerUserId);
+    res.sendStatus(204);
+}
+
 module.exports = {
     logIn,
-    getUserInfo
+    getUserInfo,
+    createFollower,
+    deleteFollower
 }

@@ -57,9 +57,42 @@ const getUserInfo = async (userId) => {
 	WHERE u.id = ?;`, [userId]);
 }
 
+const verifiedUserId = async (followerUserId) => {
+  const [verifiedResult] = await appDataSource.query(`
+  SELECT EXISTS(
+    SELECT * FROM user
+    WHERE id = ?) verifiedResult`, [followerUserId]);
+  return verifiedResult;
+}
+
+const duplicatedFollower = async (followingUserId, followerUserId) => {
+  const [duplicatedResult] = await appDataSource.query(`
+  SELECT EXISTS(
+    SELECT * FROM follower
+    WHERE following_id = ? 
+    and follower_id =?) duplicatedResult`, [followingUserId, followerUserId]);
+  return duplicatedResult;
+}
+
+const createFollower = async (followingUserId, followerUserId) => {
+  return await appDataSource.query(`
+  INSERT INTO follower (following_id, follower_id) VALUES (?, ?);`,
+  [followingUserId, followerUserId]);
+}
+
+const deleteFollower = async (followingUserId, followerUserId) => {
+  return await appDataSource.query(`
+  DELETE FROM follower
+  WHERE following_id = ? AND follower_id =?`, [followingUserId, followerUserId]);
+}
+
 module.exports = {
   createUser,
   getUserByKakaoId,
   getUserById,
-  getUserInfo
+  getUserInfo,
+  verifiedUserId,
+  createFollower,
+  duplicatedFollower,
+  deleteFollower
 }
