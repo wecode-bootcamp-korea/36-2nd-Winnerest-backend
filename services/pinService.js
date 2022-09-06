@@ -5,7 +5,9 @@ const getMainPins = async(userId, pageSize, page) => {
 }
 
 const getPinInfo = async (pinId) => {
-    return await pinDao.getPinInfo(pinId);
+    const [pinInfos] = await pinDao.getPinInfo(pinId);
+    pinInfos.tagIds = JSON.parse(pinInfos.tagIds);
+    return pinInfos;
 }
 
 module.exports = {

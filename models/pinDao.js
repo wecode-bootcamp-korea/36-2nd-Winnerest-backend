@@ -29,23 +29,35 @@ const getMainPinInfos = async (userId, pageSize, page) => {
 const getPinInfo = async (pinId) => {
     return await appDataSource.query(`
     SELECT
-        pin.img_url imgUrl,
+        p.img_url imgUrl,
         u.nickname,
-        pin.title,
-        pin.contents,
+        p.title,
+        p.contents,
+        JSON_ARRAYAGG(JSON_OBJECT(
+            'tagId', pt.tag_id
+        )) tagIds, 
         (
             SELECT COUNT(follower.following_id)
             FROM follower
             INNER JOIN user
                 ON user.id = follower.follower_id
             WHERE user.id = u.id
-        ) follower
-	FROM pin
+        ) follower,
+        (
+            SELECT COUNT(review.id)
+            FROM review
+            INNER JOIN pin
+                ON review.pin_id = pin.id
+            WHERE pin.id = p.id
+        ) reviewCount
+	FROM pin p
 	INNER JOIN	board
-	    ON pin.board_id = board.id
+	    ON p.board_id = board.id
 	INNER JOIN user u
 	    ON board.user_id = u.id
-	WHERE pin.id = ?;`, [pinId])
+    INNER JOIN pin_tag pt
+        ON p.id = pt.pin_id
+	WHERE p.id = ?;`, [pinId])
 }
 
 module.exports = {

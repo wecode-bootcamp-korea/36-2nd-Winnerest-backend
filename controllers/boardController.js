@@ -4,7 +4,7 @@ const createBoard = async (req, res) => {
     const { title } = req.body;
     const userId = req.user.id;
     await boardService.createBoard(userId, title);
-    res.status(200).json({message : 'CREATED_BOARD'});
+    res.status(201).json({message : 'CREATED_BOARD'});
 } 
 
 const getBoardTitle = async (req, res) => {
@@ -31,14 +31,14 @@ const updateBoard = async (req, res) => {
     const { title } = req.body;
     const { boardId } = req.params;
     await boardService.updateBoard(userId, title, boardId);
-    res.status(200).json({message : 'UPDATE_BOARD'});
+    res.status(201).json({message : 'UPDATE_BOARD'});
 }
 
 const deleteBoard = async (req, res) => {
     const userId = req.user.id;
     const { boardId } = req.params;
     await boardService.deleteBoard(userId, boardId);
-    res.status(204)
+    res.sendStatus(204);
 }
 
 
