@@ -37,7 +37,39 @@ const getUserInfo = async(userId) => {
   return daoDatas;
 }
 
+const createFollower = async(followingUserId, followerUserId) => {
+  const {verifiedResult} = await userDao.verifiedUserId(followerUserId);
+  
+  if (followerUserId == followingUserId || Number(verifiedResult) === 0) {
+    throw new ErrorCreater('KEY_ERROR', 400);
+  }
+
+  const {duplicatedResult} = await userDao.duplicatedFollower(followingUserId, followerUserId);
+  if (Number(duplicatedResult) === 1) {
+    throw new ErrorCreater('ALREADY_USER_FOLLOW', 400);
+  }
+
+  return await userDao.createFollower(followingUserId, followerUserId);
+}
+
+const deleteFollower = async(followingUserId, followerUserId) => {
+  const {verifiedResult} = await userDao.verifiedUserId(followerUserId);
+  
+  if (followerUserId == followingUserId || Number(verifiedResult) === 0) {
+    throw new ErrorCreater('KEY_ERROR', 400);
+  }
+
+  const {duplicatedResult} = await userDao.duplicatedFollower(followingUserId, followerUserId);
+  if (Number(duplicatedResult) === 0) {
+    throw new ErrorCreater('USER_DID_NOT_FOLLOWER', 400);
+  }
+
+  return await userDao.deleteFollower(followingUserId, followerUserId);
+}
+
 module.exports = {
   logIn,
-  getUserInfo
+  getUserInfo,
+  createFollower,
+  deleteFollower
 };
