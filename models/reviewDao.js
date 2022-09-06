@@ -34,4 +34,25 @@ const deleteMyReview = async (reviewId, userId) => {
            );
          } 
 
-module.exports ={postMyReview, checkMyReview, deleteMyReview}
+const getReviewListOfPin = async (pinId) => {
+
+    const reviewList = await appDataSource.query(
+        `SELECT 
+          r.id, 
+          r.contents, 
+          r.created_at, 
+          u.nickname,
+          (
+            SELECT count(*) 
+            FROM likes l
+            WHERE l.review_id = r.id
+          ) AS likes
+          FROM review r 
+          LEFT JOIN user u 
+          ON r.user_id = u.id
+          WHERE r.pin_id = ${pinId}
+          `
+     );
+     return reviewList
+  }
+module.exports ={postMyReview, checkMyReview, deleteMyReview, getReviewListOfPin}

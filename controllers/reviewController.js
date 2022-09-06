@@ -37,4 +37,17 @@ const deleteReview = async (req, res) => {
         })
       };
 
-module.exports ={postReviewOfPin, deleteReview}
+const getReviewsOfPin = async (req, res) => {
+      
+    const pinId  = req.params.pinId
+    if ( !pinId) {
+      throw new ErrorCreater("KEY_ERROR", 400)
+    }
+    
+    const reviewList = await reviewService.getReviewsOfPin(pinId);
+
+    res.status(200).json({ reviewList : reviewList});
+   };
+
+module.exports ={postReviewOfPin, deleteReview, getReviewsOfPin}
+
