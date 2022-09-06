@@ -5,6 +5,7 @@ const auth = require('../middlewares/auth');
 const pinRouter = express.Router();
 
 pinRouter.get('/', errorHandler(auth.validationToken), errorHandler(pinController.findMainPins));
+pinRouter.get('/:pinId', pinController.getPinInfo);
 
 module.exports = {
     pinRouter

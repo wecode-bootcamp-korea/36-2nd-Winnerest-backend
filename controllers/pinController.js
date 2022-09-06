@@ -8,6 +8,13 @@ const findMainPins = async(req, res) => {
     return res.status(200).json({data : pinInfos});
 }
 
+const getPinInfo = async(req, res) => {
+    const {pinId} = req.params;
+    const pinInfo = await pinService.getPinInfo(pinId);
+    res.status(200).json({data:pinInfo});
+}
+
 module.exports = {
     findMainPins,
+    getPinInfo
 }
