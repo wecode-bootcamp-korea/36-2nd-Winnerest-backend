@@ -78,8 +78,44 @@ const getPinInfo = async (pinId) => {
 	WHERE p.id = ?;`, [pinId])
 }
 
+const checkMyPin = async(pinId, userId) => {
+  
+    const [myPin] = await appDataSource.query(
+   
+         `SELECT *
+         FROM pin p
+            INNER JOIN board b 
+            ON b.id = p.board_id
+            INNER JOIN user u 
+            ON u.id = b.user_id
+         WHERE p.id = ${pinId} AND u.id = ${userId}
+           `,
+         )
+         return myPin
+   }
+ 
+const deleteMyPin = async(pinId) => {
+    
+  return await appDataSource.query(
+      `DELETE FROM pin p
+       WHERE p.id = ${pinId}
+         `,
+       )
+ }  
+
+const patchMyPin = async(pinId, boardId, title, contents) => {
+
+    return await appDataSource.query(
+        `UPDATE pin
+        SET 
+        title = ?,
+        contents = ?
+        WHERE id = ${pinId}
+        AND board_id = ${boardId}
+        `,[title, contents]
+    )
+}
+
 module.exports = {
-    getMainPinInfos,
-    getRecommendPins,
-    getPinInfo
+    getMainPinInfos, getRecommendPins, getPinInfo, checkMyPin, deleteMyPin, patchMyPin
 }
