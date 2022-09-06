@@ -26,6 +26,24 @@ const getMainPinInfos = async (userId, pageSize, page) => {
     LIMIT ? OFFSET ?;`, [userId, pageSize, page])
 }
 
+const getRecommendPins = async (tagId, pageSize, page) => {
+    return await appDataSource.query(
+    `SELECT
+        pin.id pinId,
+        pin.img_url url,
+        board.user_id userId,
+        pin_tag.tag_id tagId
+    FROM pin
+    INNER JOIN pin_tag
+        ON pin.id = pin_tag.pin_id
+    INNER JOIN board
+        ON pin.board_id = board.id
+    WHERE pin_tag.tag_id = ?
+    ORDER BY RAND()
+    LIMIT ? OFFSET ?;`, [tagId, pageSize, page]
+    )
+}
+
 const getPinInfo = async (pinId) => {
     return await appDataSource.query(`
     SELECT
@@ -62,5 +80,6 @@ const getPinInfo = async (pinId) => {
 
 module.exports = {
     getMainPinInfos,
+    getRecommendPins,
     getPinInfo
 }
