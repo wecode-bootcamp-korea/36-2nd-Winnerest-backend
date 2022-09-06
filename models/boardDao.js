@@ -13,7 +13,7 @@ const getBoardTitle = async (userId) => {
     SELECT
         title
     FROM board
-    WEHER user_id = ?;`, [userId])
+    WHERE user_id = ?;`, [userId])
 }
 
 const getUserBoard = async (userId) => {
