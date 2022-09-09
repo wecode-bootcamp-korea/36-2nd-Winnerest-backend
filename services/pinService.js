@@ -9,8 +9,8 @@ const getRecommendPins = async(tagId, pageSize, page) => {
     return await pinDao.getRecommendPins(tagId, pageSize = 10, page = 1);
 }
 
-const getPinInfo = async (pinId) => {
-    const [pinInfos] = await pinDao.getPinInfo(pinId);
+const getPinInfo = async (userId, pinId) => {
+    const [pinInfos] = await pinDao.getPinInfo(userId, pinId);
     pinInfos.tagIds = JSON.parse(pinInfos.tagIds);
     return pinInfos;
 }
@@ -45,4 +45,11 @@ const createPin = async (boardId, title, contents, tagIds, imgUrl, userId) => {
 }
 
 module.exports = {
-    getMainPins, getRecommendPins, getPinInfo, getPinInfo, deletePin, patchPin, createPin}
+    getMainPins,
+    getRecommendPins,
+    getPinInfo,
+    getPinInfo,
+    deletePin,
+    patchPin,
+    createPin
+}

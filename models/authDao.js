@@ -37,6 +37,7 @@ const getUserById = async (userId) => {
 const getUserInfo = async (userId) => {
   return await appDataSource.query(`
   SELECT
+    u.id userId,
     u.nickname,
     u.profile_img_url profileUrl,
     u.kakao_id kakaoId,
