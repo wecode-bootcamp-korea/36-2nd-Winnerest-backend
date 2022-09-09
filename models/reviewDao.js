@@ -1,43 +1,42 @@
 const { appDataSource } = require("./dataSource");
-const ErrorCreater = require("../middlewares/errorCreater");
 
 const postMyReview = async (contents, pinId, userId) => {
-    return await appDataSource.query(
-      `INSERT INTO review(
+  return await appDataSource.query(
+    `INSERT INTO review(
                 contents, 
                 pin_id, 
                 user_id
             ) VALUES (?, ?, ?)`,
 
-      [contents, pinId, userId]
-    );
+    [contents, pinId, userId]
+  );
 };
 
 const checkMyReview = async (reviewId, userId) => {
-    
-    const [myReview] = await appDataSource.query(
-        `SELECT *
+
+  const [myReview] = await appDataSource.query(
+    `SELECT *
             FROM review
             WHERE user_id = ${userId}
             AND id = ${reviewId}`
-         );
-         return myReview
-       } 
+  );
+  return myReview
+}
 
 const deleteMyReview = async (reviewId, userId) => {
 
-    return await appDataSource.query(
-        `DELETE
+  return await appDataSource.query(
+    `DELETE
             FROM review
             WHERE user_id = ${userId}
             AND id = ${reviewId}`
-           );
-         } 
+  );
+}
 
 const getReviewListOfPin = async (pinId) => {
 
-    const reviewList = await appDataSource.query(
-        `SELECT 
+  const reviewList = await appDataSource.query(
+    `SELECT 
           r.id, 
           r.contents, 
           r.created_at, 
@@ -52,35 +51,35 @@ const getReviewListOfPin = async (pinId) => {
           ON r.user_id = u.id
           WHERE r.pin_id = ${pinId}
           `
-     );
-     return reviewList
-  }
+  );
+  return reviewList
+}
 
 const patchMyReview = async (reviewId, contents, userId) => {
-  
-    return await appDataSource.query(
-      `UPDATE review
+
+  return await appDataSource.query(
+    `UPDATE review
         SET 
         contents = ? 
         WHERE user_id = ${userId}
         AND id = ${reviewId}`,
 
-      [contents]
-    );
+    [contents]
+  );
 };
 
 const countLike = async (reviewId, userId) => {
 
-    const [countLike] = await appDataSource.query(
-      `SELECT count(*) AS count
-       FROM likes
-       WHERE review_id = ${reviewId}
-       And user_id = ${userId}`
-    );
-       return countLike
-     
-  }
-  
+  const [countLike] = await appDataSource.query(
+    `SELECT count(*) AS count
+      FROM likes
+      WHERE review_id = ${reviewId}
+      And user_id = ${userId}`
+  );
+  return countLike
+
+}
+
 const postMyLike = async (reviewId, userId) => {
   return await appDataSource.query(
     `INSERT INTO likes( 
@@ -95,12 +94,15 @@ const postMyLike = async (reviewId, userId) => {
 const deleteMyLike = async (reviewId, userId) => {
   return await appDataSource.query(
     `DELETE
-           FROM likes
-           WHERE review_id = ${reviewId}
+          FROM likes
+          WHERE review_id = ${reviewId}
           And user_id = ${userId}`,
 
     [reviewId, userId]
-  );}
+  );
+}
 
-  module.exports = { postMyReview, checkMyReview, deleteMyReview, getReviewListOfPin,
-   patchMyReview, countLike, postMyLike, deleteMyLike}
+module.exports = {
+  postMyReview, checkMyReview, deleteMyReview, getReviewListOfPin,
+  patchMyReview, countLike, postMyLike, deleteMyLike
+}

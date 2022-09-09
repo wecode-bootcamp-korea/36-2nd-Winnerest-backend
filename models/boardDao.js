@@ -11,14 +11,25 @@ const createBoard = async (userId, title) => {
 const getBoardTitle = async (userId) => {
     return await appDataSource.query(`
     SELECT
-        title
-    FROM board
-    WHERE user_id = ?;`, [userId])
+        b.id,
+        b.title,
+        (
+        SELECT
+            pin.img_url
+        FROM pin
+        INNER JOIN board 
+            ON pin.board_id = board.id
+        WHERE board.id = b.id
+        ORDER BY RAND() LIMIT 1
+        ) imgUrl
+    FROM board b
+    WHERE b.user_id = ?;`, [userId]);
 }
 
 const getUserBoard = async (userId) => {
     return await appDataSource.query(`
     SELECT
+        board.user_id userId,
         board.id boardId,
         board.title title,
         JSON_ARRAYAGG(JSON_OBJECT(

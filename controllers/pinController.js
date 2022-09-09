@@ -13,13 +13,15 @@ const findRecommendPins = async(req, res) => {
     const pageSize = Number(req.query.pageSize);
     const page = Number(req.query.page);
     const { tagId } = req.params;
-    const recommendPinInfos = await pinService.getRecommendPins(tagId, pageSize, page);
+    const userId = req.user.id
+    const recommendPinInfos = await pinService.getRecommendPins(tagId, userId, pageSize, page);
     return res.status(200).json({data : recommendPinInfos});
 }
 
 const getPinInfo = async(req, res) => {
     const {pinId} = req.params;
-    const pinInfo = await pinService.getPinInfo(pinId);
+    const userId = req.user.id
+    const pinInfo = await pinService.getPinInfo(userId, pinId);
     res.status(200).json(pinInfo);
 }
 
@@ -55,7 +57,6 @@ const createPin = async (req, res) => {
     
     const imgUrl = req.file.location
     const userId = req.user.id
-    
     if(!boardId ||!title ||!tagIds || !imgUrl){
         throw new ErrorCreater("KEY_ERROR", 400)}
     
@@ -63,4 +64,11 @@ const createPin = async (req, res) => {
     res.status(201).json({message: "POST_CREATE"})
         }
 
-module.exports = {findMainPins, findRecommendPins, getPinInfo, createPin, deletePin, patchPin}
+module.exports = {
+    findMainPins,
+    findRecommendPins,
+    getPinInfo,
+    createPin,
+    deletePin,
+    patchPin
+}
