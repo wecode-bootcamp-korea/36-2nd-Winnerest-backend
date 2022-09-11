@@ -22,11 +22,15 @@
 
 ## &#127919; 백엔드 사용 기술 
 - <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/Mysql 8.0-4479A1?style=for-the-badge&logo=Mysql&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
- <img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white"> <img src="https://img.shields.io/badge/jsonwebtokens-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
-
+ <img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white"> <img src="https://img.shields.io/badge/jsonwebtokens-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white">
 
 <hr/>
 
+ ## 협업 툴
+ <img src="https://img.shields.io/badge/Notion-1c1c1c?style=flat-square&logo=Notion&logoColor=white"/> <img src="https://img.shields.io/badge/Slack-553830?style=flat-square&logo=Slack&logoColor=white"/>
+ <img src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=flat-square&logo=Trello&logoColor=white">
+
+ 
 ## 구현 기능 
  ### 백민석 
  - 카카오 API 구현 
@@ -43,7 +47,10 @@
 
 ## &#128218; 팀 프로젝트 자료
 
-### ERD
- - [https://www.youtube.com/watch?v=ylfITz5h1ps
+ - &#128073; [WINNEREST 시연 영상 보러가기](https://www.youtube.com/watch?v=ylfITz5h1ps)
+ - &#128073; [API 명세서 보러가기](https://docs.google.com/spreadsheets/d/1jLSj36m0BL2PonqRvVI3LOHWBiAV-856DLTmXqWqwT0/edit#gid=0)
+
+<br/>
+
 
 ---
