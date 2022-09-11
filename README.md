@@ -5,7 +5,7 @@
  ![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
  
  
-- [Pinterest](https://www.pinterest.co.kr/)
+- [Pinterest](https://www.pinterest.co.kr/)를 모티브로 클론하는 프로젝트
 
 <hr/>
 
@@ -20,7 +20,7 @@
 
 <hr/>
 
-## 백엔드 사용 기술 
+## &#127919; 백엔드 사용 기술 
 - <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/Mysql 8.0-4479A1?style=for-the-badge&logo=Mysql&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
 
 
