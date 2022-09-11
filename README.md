@@ -7,20 +7,27 @@
  
 - [Pinterest](https://www.pinterest.co.kr/)
 
+<hr/>
 
 ## 개발 기간
 - 2022년 8월 29일 ~ 2022년 9월 8일 (10일)
 
+<hr/>
 
 ## Winnerest
-- FE : 권영준, 조은지, 김다현
-- BE : 길성민, 백민석
+- FE : 권영준, 조은지, 김다현 (총 3명)
+- BE : 길성민, 백민석 (총 2명)
 
+<hr/>
 
 ## 백엔드 사용 기술 
-- 백엔드 : Node.js, MySQL 8.0, Postman, Express 
+- 백엔드 : <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/Mysql 8.0-4479A1?style=for-the-badge&logo=Mysql&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
+
+
+<img src="https://img.shields.io/badge/Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=white"> <img src="https://img.shields.io/badge/jsonwebtokens-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white"> <img src="https://img.shields.io/badge/postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
 - 협업 툴 : Trello, Slack, Google Sheet
 
+<hr/>
 
 ## 구현 기능 
 - 백민석 : 카카오 API 구현, AWS- S3를 이용한 사진 업로드와 삭제 구현, 리뷰와 댓글 좋아요 CRUD 구현
