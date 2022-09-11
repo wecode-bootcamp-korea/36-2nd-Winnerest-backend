@@ -44,6 +44,6 @@
 ## &#128218; 팀 프로젝트 자료
 
 ### ERD
- - [
+ - [https://www.youtube.com/watch?v=ylfITz5h1ps
 
 ---
