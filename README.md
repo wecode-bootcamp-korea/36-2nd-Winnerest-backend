@@ -5,7 +5,7 @@
  ![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
  
  
-- 사진에 기반한 소셜 네트워크 서비스 'Pinterest'를 클론하였습니다.
+- [BODYLUV](https://bodyluv.kr/?
 
 
 ## 개발 기간
