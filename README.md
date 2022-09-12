@@ -45,12 +45,18 @@
 
 <br/>
 
+## ERD
+
+![Untitled (1)](https://user-images.githubusercontent.com/103938821/189585501-b165220b-341d-4354-8794-74116de61244.png)
+
+<br/>
+
 ## &#128218; 팀 프로젝트 자료
 
  - &#128073; [WINNEREST 시연 영상 보러가기](https://www.youtube.com/watch?v=ylfITz5h1ps)
  - &#128073; [API 명세서 보러가기](https://docs.google.com/spreadsheets/d/1jLSj36m0BL2PonqRvVI3LOHWBiAV-856DLTmXqWqwT0/edit#gid=0)
+ - &#128073; [회고록 보러가기](https://mark34record.tistory.com/62?category=1058594)
 
 <br/>
-
 
 ---
