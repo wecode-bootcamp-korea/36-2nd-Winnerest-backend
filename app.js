@@ -11,6 +11,9 @@ const createApp = () => {
     app.use(cors());
     app.use(morgan("dev"));
     app.use(router)
+    app.use(globalErrorHandler = (err, req, res, next) => {
+        res.status(err.statusCode ? err.statusCode : 500).json({ message: err.message });
+    })
     return app;
 };
 module.exports = { createApp };
