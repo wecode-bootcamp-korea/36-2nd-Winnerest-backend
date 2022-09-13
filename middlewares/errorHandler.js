@@ -3,9 +3,8 @@ function errorHandler(asyncController) {
         try {
             await asyncController(req, res, next)
         }
-        catch (err) {
-        res.status(err.statusCode ? err.statusCode : 500).json({ message: err.message });
-        }} 
-    }
-
+        catch(err){next(err)}
+       
+    }}
 module.exports = errorHandler;
+
