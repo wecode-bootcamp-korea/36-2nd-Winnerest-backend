@@ -51,6 +51,6 @@ describe('CREATED_BOARD', () => {
             .set({ Authorization: 'Some Random Token' })
             .send({title : 'Testing Title'})
             .expect({ message : 'CREATED_BOARD' })
-            .expect(200);
+            .expect(201);
     })
 })

@@ -4,7 +4,6 @@ function errorHandler(asyncController) {
             await asyncController(req, res, next)
         }
         catch (err) {
-            console.log(err)
         res.status(err.statusCode ? err.statusCode : 500).json({ message: err.message });
         }} 
     }

@@ -19,7 +19,7 @@ describe('GET USER DATA', () => {
     test('SUCCESS : Get User Data', async () => {
         const jwtSpy = jest.spyOn(jwt, 'verify');
         jwtSpy.mockReturnValue({sub : 1});
-        const res = await request(app)
+        await request(app)
             .get('/auth')
             .set({ Authorization: 'Some Random Token' })
             .send({id: 1})
@@ -29,7 +29,7 @@ describe('GET USER DATA', () => {
     test('FAIL : Invalid Access Token Error', async () => {
         const jwtSpy = jest.spyOn(jwt, 'verify');
         jwtSpy.mockReturnValue({sub : 1});
-        const res = await request(app)
+        await request(app)
             .get('/auth')
             .expect({ message : 'INVALID_ACCESS_TOKEN' })
             .expect(401)
@@ -38,7 +38,7 @@ describe('GET USER DATA', () => {
     test('FAIL : User Not Defined Error', async () => {
         const jwtSpy = jest.spyOn(jwt, 'verify');
         jwtSpy.mockReturnValue({sub : null});
-        const res = await request(app)
+        await request(app)
             .get('/auth')
             .set({ Authorization: 'Some Random Token' })
             .expect({ message : 'USER_NOT_DEFINED' })
