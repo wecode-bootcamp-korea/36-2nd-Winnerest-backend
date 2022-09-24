@@ -5,7 +5,7 @@
  ![메인 파일](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9Cp4b%2FbtrLMzIWjfm%2FQfmklxGjs9MGLKSHHmx0eK%2Fimg.png)
  
  
-- [Pinterest](https://www.pinterest.co.kr/)라는 사진에 기반한 소셜 SNS를 클론하여 프로젝트를 진행하였습니다. 
+- [Pinterest](https://www.pinterest.co.kr/)라는 사진에 기반한 소셜 SNS를 모티브하여 프로젝트를 진행하였습니다. 
 
 <hr/>
 
